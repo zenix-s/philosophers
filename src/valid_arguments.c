@@ -11,27 +11,32 @@
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
+#include <stdint.h>
 
-static t_bool is_number(const char *str)
+static t_bool	is_number(const char *str)
 {
-	while (*str)
+	uint64_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (*str < '0' || *str > '9')
+		if (str[i] < '0' || str[i] > '9')
 		{
+			print_error(ERROR_ARGUMENTS, ERROR_NOT_NUMBER);
 			return (FALSE);
 		}
-		str++;
+		i++;
 	}
 	return (TRUE);
 }
 
-t_bool valid_arguments(int argc, char **argv)
+t_bool	valid_arguments(int argc, char **argv)
 {
 	int	i;
 
 	if (argc != 5 && argc != 6)
 	{
-		printf("Usage: %s <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [<number_of_times_each_philosopher_must_eat>]\n", argv[0]);
+		print_error(ERROR_ARGUMENTS, ERROR_USAGE);
 		return (FALSE);
 	}
 	i = 1;

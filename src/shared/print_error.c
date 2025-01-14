@@ -23,8 +23,9 @@ static uint64_t	ft_strlen(char *str)
 	return (i);
 }
 
-void	print_error(char *message)
+void	print_error(char *error_code, char *error_message)
 {
 	write(2, "ERROR\n", 6);
-	write(2, message, ft_strlen(message));
+	write(2, error_code, ft_strlen(error_code));
+	write(2, error_message, ft_strlen(error_message));
 }

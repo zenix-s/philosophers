@@ -17,15 +17,26 @@
 // pthread_mutex_unlock
 
 #include "../include/philosophers.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int				g_count = 0;
 pthread_mutex_t	g_count_mutex;
+
+uint64_t	timestamp(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+}
 
 void	*philosopher_life(void *arg)
 {
 	t_philosopher	*philosopher;
 
 	philosopher = (t_philosopher *)arg;
+	printf("Time: %lu\n", timestamp());
 	printf("Philosopher %d is alive\n", philosopher->id);
 	while (g_count < 10)
 	{
@@ -94,19 +105,43 @@ void	join_threads(const int n_philosophers, t_philosopher **philosophers)
 }
 
 
+t_deux	*create_deux(const int argc, char **argv)
+{
+	t_deux	*deux;
+
+	deux = malloc(sizeof(t_deux));
+	if (deux == NULL)
+		return (print_error(ERROR_MALLOC, ERROR_MALLOC), NULL);
+	if (!to_uint64(argv[1], &deux->n_philosophers))
+		return (free(deux), print_error(ERROR_MALLOC, ERROR_N_PHIL), NULL);
+	if (!to_uint64(argv[2], &deux->time_to_die))
+		return (free(deux), print_error(ERROR_MALLOC, ERROR_DIE_TIME), NULL);
+	if (!to_uint64(argv[3], &deux->time_to_eat))
+		return (free(deux), print_error(ERROR_MALLOC, ERROR_EAT_TIME), NULL);
+	if (!to_uint64(argv[4], &deux->time_to_sleep))
+		return (free(deux), print_error(ERROR_MALLOC, ERROR_SLEEP_TIME), NULL);
+	if (argc == 6 && !to_uint64(argv[5], &deux->n_meals))
+		return (free(deux), print_error(ERROR_MALLOC, ERROR_N_MEALS), NULL);
+	return (deux);
+}
+
 int	main(int argc, char **argv)
 {
-	int				n_philosophers;
-	int				i;
-	t_philosopher	**philosophers;
-	uint64_t		start;
+	uint64_t		i;
+	t_deux			*deux;
 
 	if (!valid_arguments(argc, argv))
 	{
 		return (EXIT_FAILURE);
 	}
-	n_philosophers = 1;
-	if (birth_philosophers(n_philosophers, &philosophers) == FALSE)
+	deux = create_deux(argc, argv);
+	if (deux == NULL)
+	{
+		print_error(ERROR_MALLOC, ERROR_MALLOC);
+		return (EXIT_FAILURE);
+	}
+
+	if (birth_philosophers(deux->n_philosophers, &(deux->philosophers)) == FALSE)
 	{
 		return (EXIT_FAILURE);
 	}
@@ -114,21 +149,22 @@ int	main(int argc, char **argv)
 	{
 		usleep(1000);
 	}
-	join_threads(n_philosophers, philosophers);
+	join_threads(deux->n_philosophers, deux->philosophers);
 	i = 0;
-	while (i < n_philosophers)
+	while (i < deux->n_philosophers)
 	{
 		printf("Philosopher %d finished with %d iterations\n",
-			philosophers[i]->id, philosophers[i]->contributions);
+			deux->philosophers[i]->id, deux->philosophers[i]->contributions);
 		i++;
 	}
 	i = 0;
-	while (i < n_philosophers)
+	while (i < deux->n_philosophers)
 	{
-		free(philosophers[i]);
+		free(deux->philosophers[i]);
 		i++;
 	}
-	free(philosophers);
+	free(deux->philosophers);
+	free(deux);
 	pthread_mutex_destroy(&g_count_mutex);
 	return (EXIT_SUCCESS);
 }
