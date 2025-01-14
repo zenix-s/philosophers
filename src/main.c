@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -17,73 +16,50 @@
 // pthread_mutex_destroy, pthread_mutex_lock,
 // pthread_mutex_unlock
 
+#include "../include/philosophers.h"
 
-#include <stdio.h>
-#include <unistd.h>
-// gettimeofday
-#include <sys/time.h>
-// pthread_create
-#include <pthread.h>
-// Malloc
-#include <stdlib.h>
+int				g_count = 0;
+pthread_mutex_t	g_count_mutex;
 
-int g_count = 0;
-pthread_mutex_t g_count_mutex;
-
-
-typedef struct s_philosopher
+void	*philosopher_life(void *arg)
 {
-    int id;
-	int contributions;
-	pthread_t thread;
-} t_philosopher;
+	t_philosopher	*philosopher;
 
-typedef enum s_bool
-{
-    FALSE,
-    TRUE
-} t_bool;
-
-
-void *philosopher_life(void *arg)
-{
-    t_philosopher *philosopher = (t_philosopher *)arg;
-
-    printf("Philosopher %d is alive\n", philosopher->id);
-
+	philosopher = (t_philosopher *)arg;
+	printf("Philosopher %d is alive\n", philosopher->id);
 	while (g_count < 100)
 	{
 		pthread_mutex_lock(&g_count_mutex);
 		if (g_count >= 100)
-        {
-            pthread_mutex_unlock(&g_count_mutex);
-            break ;
-        }
+		{
+			pthread_mutex_unlock(&g_count_mutex);
+			break ;
+		}
 		g_count++;
 		philosopher->contributions++;
 		pthread_mutex_unlock(&g_count_mutex);
 		usleep(100);
 	}
-
-    return (NULL);
+	return (NULL);
 }
 
-t_bool create_philosopher(t_philosopher **philosopher, const int id)
+t_bool	create_philosopher(t_philosopher **philosopher, const int id)
 {
 	*philosopher = malloc(sizeof(t_philosopher));
-    if (*philosopher == NULL)
-    {
-        return (FALSE);
-    }
-    (*philosopher)->id = id;
-    (*philosopher)->contributions = 0;
-	pthread_create(&(*philosopher)->thread, NULL, philosopher_life, *philosopher);
+	if (*philosopher == NULL)
+	{
+		return (FALSE);
+	}
+	(*philosopher)->id = id;
+	(*philosopher)->contributions = 0;
+	pthread_create(&(*philosopher)->thread, NULL, philosopher_life,
+		*philosopher);
 	return (TRUE);
 }
 
-t_bool birth_philosophers(int n_philosophers, t_philosopher ***philosophers)
+t_bool	birth_philosophers(int n_philosophers, t_philosopher ***philosophers)
 {
-	int i;
+	int	i;
 
 	*philosophers = malloc(sizeof(t_philosopher *) * n_philosophers);
 	i = 0;
@@ -92,7 +68,7 @@ t_bool birth_philosophers(int n_philosophers, t_philosopher ***philosophers)
 		if (create_philosopher(&(*philosophers)[i], i))
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		while (i > 0)
 		{
@@ -105,9 +81,10 @@ t_bool birth_philosophers(int n_philosophers, t_philosopher ***philosophers)
 	return (TRUE);
 }
 
-void join_threads(int n_philosophers, t_philosopher **philosophers)
+void	join_threads(int n_philosophers, t_philosopher **philosophers)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (i < n_philosophers)
 	{
@@ -118,33 +95,30 @@ void join_threads(int n_philosophers, t_philosopher **philosophers)
 
 int	main(void)
 {
-	int n_philosophers = 3;
-	int i;
-	t_philosopher **philosophers;
+	int				n_philosophers;
+	int				i;
+	t_philosopher	**philosophers;
 
+	n_philosophers = 3;
 	if (birth_philosophers(n_philosophers, &philosophers) == FALSE)
 	{
 		return (EXIT_FAILURE);
 	}
-
 	join_threads(n_philosophers, philosophers);
-
 	i = 0;
 	while (i < n_philosophers)
-    {
-        printf("Philosopher %d finished with %d iterations\n", philosophers[i]->id, philosophers[i]->contributions);
-        i++;
-    }
-
+	{
+		printf("Philosopher %d finished with %d iterations\n",
+			philosophers[i]->id, philosophers[i]->contributions);
+		i++;
+	}
 	i = 0;
 	while (i < n_philosophers)
-    {
-        free(philosophers[i]);
-        i++;
-    }
+	{
+		free(philosophers[i]);
+		i++;
+	}
 	free(philosophers);
-
 	pthread_mutex_destroy(&g_count_mutex);
-
 	return (EXIT_SUCCESS);
 }

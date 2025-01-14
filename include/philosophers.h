@@ -14,4 +14,26 @@
 
 # define PHILOSOPHERS_H
 
+# include <stdio.h>
+# include <unistd.h>
+// gettimeofday
+# include <sys/time.h>
+// pthread_create
+# include <pthread.h>
+// Malloc
+# include <stdlib.h>
+
+typedef struct s_philosopher
+{
+	int			id;
+	int			contributions;
+	pthread_t	thread;
+}				t_philosopher;
+
+typedef enum s_bool
+{
+	FALSE,
+	TRUE
+}				t_bool;
+
 #endif
