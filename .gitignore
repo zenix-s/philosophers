@@ -13,3 +13,7 @@
 # Editor files
 .vscode
 .idea
+.vs
+
+# Project files
+philo

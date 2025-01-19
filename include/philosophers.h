@@ -48,10 +48,20 @@
 //-----------------------------------------------------------------------------#
 //                                STRUCTS                                      #
 //-----------------------------------------------------------------------------#
+
+typedef struct s_times
+{
+	uint64_t		time_to_die;
+	uint64_t		time_to_eat;
+	uint64_t		time_to_sleep;
+}					t_times;
+
 typedef struct s_philosopher
 {
 	int				id;
 	int				contributions;
+	uint64_t		last_meal;
+	t_times			*times;
 	pthread_t		thread;
 }					t_philosopher;
 
@@ -64,10 +74,8 @@ typedef enum s_bool
 typedef struct s_deux
 {
 	uint64_t		n_philosophers;
-	uint64_t		time_to_die;
-	uint64_t		time_to_eat;
-	uint64_t		time_to_sleep;
 	uint64_t		n_meals;
+	t_times			*times;
 	t_philosopher	**philosophers;
 	pthread_mutex_t	*forks;
 }					t_deux;
