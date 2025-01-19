@@ -26,22 +26,22 @@ RM = rm -rf
 #                                 TARGETS                                      #
 #------------------------------------------------------------------------------#
 %.o: %.c
-	@echo -e "${BLUE} ◎ $(YELLOW)Compiling  ${RED}→  $(GREEN)$< $(DEF_COLOR)"
+	@echo -e "$(YELLOW) ◎ Compiling $(GREEN)$< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(HEADERS) -o $(NAME)
-	@echo -e "\n ${BLUE}◎ ${GREEN}$(NAME) has been created successfully!${DEF_COLOR}"
+	@echo -e "\n $(GREEN)◎ $(NAME) has been created successfully!$(DEF_COLOR)"
 
 all: $(NAME)
 
 clean:
 	@$(RM) $(OBJS)
-	@echo -e " ${BLUE}◎ ${RED}Objects files have been removed!${DEF_COLOR}\n"
+	@echo -e " $(RED)◎ Objects files have been removed!$(DEF_COLOR)"
 
 fclean: clean
 	@$(RM)  $(NAME)
-	@echo -e " ${BLUE}◎ ${RED}$(NAME) has been removed!${DEF_COLOR}\n"
+	@echo -e " $(RED)◎ $(NAME) has been removed!$(DEF_COLOR)\n"
 
 re: fclean all
 

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   is_even.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: serferna <serferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../../include/philosophers.h"
 
-void	print_error(char *error_code, char *error_message)
+t_bool	is_even(const int n)
 {
-	printf("ERROR\n%s%s", error_code, error_message);
+	return (n % 2 == 0);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   philosopher_life.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: serferna <serferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philosophers.h"
+#include "../../../include/domain.h"
 
-void	print_error(char *error_code, char *error_message)
+void	*philosopher_life(void *arg)
 {
-	printf("ERROR\n%s%s", error_code, error_message);
+	t_philosopher	*philo;
+
+	philo = (t_philosopher *)arg;
+	philo->last_meal = timestamp();
+	if (is_even(philo->id))
+		usleep(1000);
+	while (philo->meals < philo->global->n_meals && !is_philo_dead(philo))
+	{
+		if (!philo_eat(philo) || has_eaten_required_meals(philo)
+			|| is_philo_dead(philo))
+			break ;
+		philo_sleep(philo);
+		if (is_philo_dead(philo))
+			break ;
+		print_log(philo, THINKING);
+	}
+	return (NULL);
 }

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
-#include <stdint.h>
+#include "../include/domain.h"
 
 static t_bool	is_number(const char *str)
 {

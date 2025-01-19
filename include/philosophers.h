@@ -15,23 +15,6 @@
 # define PHILOSOPHERS_H
 
 //-----------------------------------------------------------------------------#
-//                                CONSTANTS                                    #
-// ----------------------------------------------------------------------------#
-
-# define ERROR_ARGUMENTS "Invalid arguments\n"
-# define ERROR_MALLOC "Error allocating memory\n"
-
-# define ERROR_USAGE \
-	"Usage: ./philo <number_of_philosophers> <time_to_die> <time_to_eat> \
-<time_to_sleep> [<number_of_times_each_philosopher_must_eat>]\n"
-# define ERROR_NOT_NUMBER "Argument is not a number\n"
-# define ERROR_N_PHIL "Invalid parameter number_of_philosophers"
-# define ERROR_DIE_TIME "Invalid parameter time_to_die"
-# define ERROR_EAT_TIME "Invalid parameter time_to_eat"
-# define ERROR_SLEEP_TIME "Invalid parameter time_to_sleep"
-# define ERROR_N_MEALS "Invalid parameter number_of_times_each_philosopher_must_eat"
-
-//-----------------------------------------------------------------------------#
 //                                INCLUDES                                     #
 //-----------------------------------------------------------------------------#
 # include <stdio.h>
@@ -46,47 +29,24 @@
 # include <stdint.h>
 
 //-----------------------------------------------------------------------------#
-//                                STRUCTS                                      #
+// 									ENUMS                                      #
 //-----------------------------------------------------------------------------#
-
-typedef struct s_times
-{
-	uint64_t		time_to_die;
-	uint64_t		time_to_eat;
-	uint64_t		time_to_sleep;
-}					t_times;
-
-typedef struct s_philosopher
-{
-	int				id;
-	int				contributions;
-	uint64_t		last_meal;
-	t_times			*times;
-	pthread_t		thread;
-}					t_philosopher;
 
 typedef enum s_bool
 {
 	FALSE,
 	TRUE
-}					t_bool;
-
-typedef struct s_deux
-{
-	uint64_t		n_philosophers;
-	uint64_t		n_meals;
-	t_times			*times;
-	t_philosopher	**philosophers;
-	pthread_mutex_t	*forks;
-}					t_deux;
+}			t_bool;
 
 //-----------------------------------------------------------------------------#
 //                                PROTOTYPES                                   #
 //-----------------------------------------------------------------------------#
 
-t_bool				to_uint64(const char *str, uint64_t *n);
-void				print_error(char *error_code, char *error_message);
-
-t_bool				valid_arguments(int argc, char **argv);
+t_bool		to_uint64(const char *str, uint64_t *n);
+void		print_error(char *error_code, char *error_message);
+uint64_t	timestamp(void);
+t_bool		valid_arguments(int argc, char **argv);
+uint64_t	timediff(uint64_t start, uint64_t end);
+t_bool		is_even(const int n);
 
 #endif
