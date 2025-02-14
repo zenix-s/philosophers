@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   timestamp.c                                        :+:      :+:    :+:   */
+/*   set_machine_error.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: serferna <serferna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 23:51:02 by serferna          #+#    #+#             */
-/*   Updated: 2025/02/14 19:37:28 by serferna         ###   ########.fr       */
+/*   Created: 2025/02/15 00:31:05 by serferna          #+#    #+#             */
+/*   Updated: 2025/02/15 00:31:09 by serferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "../../include/state_machine.h"
 #include "../../include/philosophers.h"
 
-uint64_t	timestamp(void)
+void set_machine_error(t_state_machine *machine, char *error)
 {
-	struct timeval	t;
-
-	gettimeofday(&t, NULL);
-	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+	machine->error = error;
+	machine->execute = error_state;
 }

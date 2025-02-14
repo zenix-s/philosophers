@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   timestamp.c                                        :+:      :+:    :+:   */
+/*   is_even.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: serferna <serferna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: serferna <serferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 23:51:02 by serferna          #+#    #+#             */
-/*   Updated: 2025/02/14 19:37:28 by serferna         ###   ########.fr       */
+/*   Created: 2025/01/14 13:35:31 by serferna          #+#    #+#             */
+/*   Updated: 2025/01/14 13:35:31 by serferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/philosophers.h"
 
-uint64_t	timestamp(void)
+t_bool	is_even(const int n)
 {
-	struct timeval	t;
-
-	gettimeofday(&t, NULL);
-	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+	return (n % 2 == 0);
 }

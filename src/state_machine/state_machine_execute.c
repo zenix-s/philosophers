@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   timestamp.c                                        :+:      :+:    :+:   */
+/*   state_machine_execute.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: serferna <serferna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 23:51:02 by serferna          #+#    #+#             */
-/*   Updated: 2025/02/14 19:37:28 by serferna         ###   ########.fr       */
+/*   Created: 2025/02/14 22:17:37 by serferna          #+#    #+#             */
+/*   Updated: 2025/02/14 22:18:24 by serferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "../../include/philosophers.h"
+#include "../../include/state_machine.h"
 
-uint64_t	timestamp(void)
+void state_machine_execute(t_state_machine *machine)
 {
-	struct timeval	t;
-
-	gettimeofday(&t, NULL);
-	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+	if (machine->execute)
+		machine->execute(machine);
 }

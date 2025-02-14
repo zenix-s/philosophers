@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   timestamp.c                                        :+:      :+:    :+:   */
+/*   error_state.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: serferna <serferna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 23:51:02 by serferna          #+#    #+#             */
-/*   Updated: 2025/02/14 19:37:28 by serferna         ###   ########.fr       */
+/*   Created: 2025/02/14 23:03:02 by serferna          #+#    #+#             */
+/*   Updated: 2025/02/14 23:45:40 by serferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../../include/philosophers.h"
 
-#include "../../include/philosophers.h"
-
-uint64_t	timestamp(void)
+void error_state(t_state_machine *machine)
 {
-	struct timeval	t;
-
-	gettimeofday(&t, NULL);
-	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+	printf("Error: %s\n", machine->error);
+	machine->is_done = TRUE;
 }
