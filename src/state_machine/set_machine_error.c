@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/state_machine.h"
 #include "../../include/philosophers.h"
 
 void set_machine_error(t_state_machine *machine, char *error)

@@ -16,9 +16,8 @@
 # include "global.h"
 
 //-----------------------------------------------------------------------------#
-//                                ERRORS                                       #
+//                                ERRORS
 // ----------------------------------------------------------------------------#
-# define ERROR_ARGUMENTS "Invalid arguments\n"
 # define ERROR_MALLOC "Error allocating memory\n"
 
 # define ERROR_USAGE \
@@ -50,7 +49,7 @@
 	"Invalid number_of_times_each_philosopher_must_eat"
 
 //-----------------------------------------------------------------------------#
-// 									ENUMS                                      #
+// 									ENUMS
 //-----------------------------------------------------------------------------#
 
 typedef enum s_action
@@ -63,8 +62,20 @@ typedef enum s_action
 }					t_action;
 
 //-----------------------------------------------------------------------------#
-//                                STRUCTS                                      #
+//                                STRUCTS
 //-----------------------------------------------------------------------------#
+
+typedef struct s_philosopher
+{
+	int				id;
+	uint64_t		meals;
+	uint64_t		last_meal;
+	pthread_t		thread;
+	uint64_t 		left_fork;
+	uint64_t 		right_fork;
+	struct s_global	*global;
+	void 			(*routine)(struct s_philosopher *);
+}					t_philosopher;
 
 typedef struct s_global
 {
@@ -75,28 +86,33 @@ typedef struct s_global
 	uint64_t		start_time;
 	t_bool			dead;
 	pthread_mutex_t	write_mutex;
-	uint8_t 		n_philosophers;
+	uint8_t 		n_philos;
+	pthread_mutex_t	*forks;
+	t_philosopher	**philosophers;
 }					t_global;
 
-typedef struct s_philosopher
+typedef struct s_state_machine
 {
-	int				id;
-	uint64_t		meals;
-	uint64_t		last_meal;
-	pthread_t		thread;
-	t_bool			left_fork;
-	pthread_mutex_t	*left_fork_mutex;
-	t_bool			right_fork;
-	pthread_mutex_t	*right_fork_mutex;
-	t_global		*global;
-}					t_philosopher;
+	// State machine
+	char		*error;
+	t_bool		is_done;
+	void		(*execute)(struct s_state_machine *);
 
-typedef struct s_deux
-{
-	uint64_t		n_philosophers;
+	// Context
+	int				argc;
+	char			**argv;
 	t_global		*global;
-	t_philosopher	**philosophers;
-	pthread_mutex_t	*forks;
-}					t_deux;
+}				t_state_machine;
+
+
+//-----------------------------------------------------------------------------#
+// 							      PROTOTYPES
+//-----------------------------------------------------------------------------#
+
+t_state_machine	*create_state_machine(int argc, char **argv);
+void			set_machine_error(t_state_machine *machine, char *error);
+
+
+void			print_log(t_philosopher *philo, t_action action);
 
 #endif

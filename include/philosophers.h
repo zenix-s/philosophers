@@ -16,10 +16,30 @@
 
 # include "domain.h"
 # include "global.h"
-# include "state_machine.h"
 
 void	error_state(t_state_machine *machine);
 void	validate_arguments_state(t_state_machine *machine);
 void	create_global_state(t_state_machine *machine);
+void	create_forks_state(t_state_machine *machine);
+void	create_philosophers_state(t_state_machine *machine);
+void	start_simulation_state(t_state_machine *machine);
+void	join_threads_state(t_state_machine *machine);
+void	monitor_simulation_state(t_state_machine *machine);
+void	destroy_simulation_state(t_state_machine *machine);
+
+
+void	*philosopher_routine(void *philosopher);
+void	philosopher_eat_state(t_philosopher *philosopher);
+void	philosopher_sleep_state(t_philosopher *philosopher);
+
+/**
+ * When a philosopher dies, it will enter this state and will not be able to
+ * change its state anymore.
+ */
+void	*philosopher_suicide_state(t_philosopher *philosopher);
+
+
+t_bool	is_philo_dead(t_philosopher *philo);
+t_bool	has_eaten_required_meals(t_philosopher *philo);
 
 #endif

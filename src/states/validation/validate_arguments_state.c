@@ -39,7 +39,6 @@ void	validate_arguments_state(t_state_machine *machine)
 	i = 1;
 	while (i < machine->argc)
 	{
-		printf("Argv[%d]: %s\n", i, machine->argv[i]);
 		if (!is_number(machine->argv[i]))
 		{
 			machine->error = ERROR_NOT_NUMBER;

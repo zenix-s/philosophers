@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/state_machine.h"
-#include <stdio.h>
+#include "../../include/philosophers.h"
 
 t_state_machine	*create_state_machine(int argc, char **argv)
 {
@@ -23,6 +22,8 @@ t_state_machine	*create_state_machine(int argc, char **argv)
 	// Initialize state machine
 	state_machine->execute = NULL;
 	state_machine->is_done = FALSE;
+	state_machine->error = NULL;
+	state_machine->global = NULL;
 
 	// Initialize context
 	state_machine->argc = argc;
