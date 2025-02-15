@@ -12,7 +12,7 @@
 
 #include "../../include/philosophers.h"
 
-t_bool is_philo_dead(t_philosopher *philo)
+t_bool	is_philo_dead(const t_philosopher *philo)
 {
-	return (timestamp() - philo->last_meal > philo->global->time_to_die);
+	return (timestamp() - philo->last_meal > philo->global->die_time);
 }

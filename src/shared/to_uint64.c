@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/philosophers.h"
 
 t_bool	to_uint64(const char *str, uint64_t *n)
@@ -32,7 +31,7 @@ t_bool	to_uint64(const char *str, uint64_t *n)
 	return (TRUE);
 }
 
-t_bool to_uint8(const char *str, uint8_t *n)
+t_bool	to_uint8(const char *str, uint8_t *n)
 {
 	uint64_t	tmp;
 

@@ -12,10 +12,8 @@
 
 #include "../../include/philosophers.h"
 
-static t_bool create_philosopher(
-	t_philosopher **philo,
-	const int id,
-	t_global *global)
+static t_bool	create_philosopher(t_philosopher **philo, const int id,
+		t_global *global)
 {
 	*philo = malloc(sizeof(t_philosopher));
 	if (*philo == NULL)
@@ -24,21 +22,22 @@ static t_bool create_philosopher(
 	(*philo)->meals = 0;
 	(*philo)->last_meal = timestamp();
 	(*philo)->global = global;
-	(*philo)->left_fork = id;
-	(*philo)->right_fork = (id + 1) % global->n_philos;
+	(*philo)->l_fork = id;
+	(*philo)->r_fork = (id + 1) % global->n_philos;
 	return (TRUE);
 }
 
 void	create_philosophers_state(t_state_machine *machine)
 {
-	t_global		*global = machine->global;
-	int				i;
+	t_global	*global;
+	int			i;
 
+	global = machine->global;
 	global->philosophers = malloc(sizeof(t_philosopher *) * global->n_philos);
 	if (!global->philosophers)
 	{
 		set_machine_error(machine, ERROR_MALLOC);
-		return;
+		return ;
 	}
 	i = 0;
 	while (i < global->n_philos)
@@ -46,7 +45,7 @@ void	create_philosophers_state(t_state_machine *machine)
 		if (!create_philosopher(&global->philosophers[i], i, global))
 		{
 			set_machine_error(machine, ERROR_MALLOC);
-			return;
+			return ;
 		}
 		i++;
 	}

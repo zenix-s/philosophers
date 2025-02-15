@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher_routine.c                              :+:      :+:    :+:   */
+/*   philosopher_sleep_state.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: serferna <serferna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 12:11:54 by serferna          #+#    #+#             */
-/*   Updated: 2025/02/15 12:11:54 by serferna         ###   ########.fr       */
+/*   Created: 2025/02/15 15:32:32 by serferna          #+#    #+#             */
+/*   Updated: 2025/02/15 15:32:44 by serferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philosophers.h"
 
-void	*philosopher_routine(void *philosopher)
+void	philosopher_sleep_state(t_philosopher *philosopher)
 {
-	t_philosopher	*philo;
+	uint64_t	start;
 
-	philo = (t_philosopher *)philosopher;
-	philo->last_meal = timestamp();
-	philo->routine = philosopher_eat_state;
-	if (is_even(philo->id))
-		usleep(15000);
-	while (!philo->global->dead && !has_eaten_required_meals(philo))
-		philo->routine(philo);
-	return (NULL);
+	start = timestamp();
+	print_log(philosopher, SLEEPING);
+	while (!philosopher->global->dead)
+	{
+		if (timediff(start, timestamp()) >= philosopher->global->sleep_time)
+			break ;
+		usleep(50);
+	}
+	philosopher->routine = philosopher_eat_state;
 }

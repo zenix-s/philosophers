@@ -12,7 +12,7 @@
 
 #include "../../include/philosophers.h"
 
-t_bool has_eaten_required_meals(t_philosopher *philo)
+t_bool	has_eaten_required_meals(const t_philosopher *philo)
 {
 	return (philo->meals >= philo->global->n_meals);
 }

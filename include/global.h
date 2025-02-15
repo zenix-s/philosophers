@@ -34,15 +34,15 @@ typedef enum e_bool
 {
 	FALSE,
 	TRUE
-}	t_bool;
+}			t_bool;
 
 //-----------------------------------------------------------------------------#
-// 							      PROTOTYPES
+// 								   PROTOTYPES
 //-----------------------------------------------------------------------------#
-t_bool			is_even(const int number);
-uint64_t		timediff(uint64_t start, uint64_t end);
-uint64_t		timestamp(void);
-t_bool			to_uint64(const char *str, uint64_t *n);
-t_bool			to_uint8(const char *str, uint8_t *n);
+t_bool		is_even(const int number);
+uint64_t	timediff(uint64_t start, uint64_t end);
+uint64_t	timestamp(void);
+t_bool		to_uint64(const char *str, uint64_t *n);
+t_bool		to_uint8(const char *str, uint8_t *n);
 
 #endif

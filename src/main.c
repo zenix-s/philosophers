@@ -12,10 +12,10 @@
 
 #include "../include/philosophers.h"
 
-int	main(int argc, char **argv)
+int	main(const int argc, char **argv)
 {
 	t_state_machine	*machine;
-	int exit_code;
+	int				exit_code;
 
 	exit_code = EXIT_SUCCESS;
 	machine = create_state_machine(argc, argv);

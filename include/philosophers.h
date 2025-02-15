@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
@@ -27,7 +26,6 @@ void	join_threads_state(t_state_machine *machine);
 void	monitor_simulation_state(t_state_machine *machine);
 void	destroy_simulation_state(t_state_machine *machine);
 
-
 void	*philosopher_routine(void *philosopher);
 void	philosopher_eat_state(t_philosopher *philosopher);
 void	philosopher_sleep_state(t_philosopher *philosopher);
@@ -38,8 +36,7 @@ void	philosopher_sleep_state(t_philosopher *philosopher);
  */
 void	*philosopher_suicide_state(t_philosopher *philosopher);
 
-
-t_bool	is_philo_dead(t_philosopher *philo);
-t_bool	has_eaten_required_meals(t_philosopher *philo);
+t_bool	is_philo_dead(const t_philosopher *philo);
+t_bool	has_eaten_required_meals(const t_philosopher *philo);
 
 #endif

@@ -11,23 +11,34 @@
 /* ************************************************************************** */
 
 #include "../../include/philosophers.h"
+#include <stdint.h>
 
-void monitor_simulation_state(t_state_machine *machine)
+void	oh_no_the_butler_is_dead(t_global *global, uint8_t i)
 {
-	t_global *global;
-	int i;
-	t_bool all_eaten;
+	if (!global->dead)
+	{
+		global->dead = TRUE;
+		printf("%lu %d died\n", timestamp() - global->start_time,
+			global->philosophers[i]->id);
+	}
+}
+
+void	monitor_simulation_state(t_state_machine *machine)
+{
+	t_global	*global;
+	uint8_t		i;
+	t_bool		all_eaten;
 
 	global = machine->global;
 	all_eaten = TRUE;
 	i = 0;
 	while (i < global->n_philos)
 	{
-
 		if (is_philo_dead(global->philosophers[i]))
 		{
-			print_log(global->philosophers[i], DIED);
-			global->dead = TRUE;
+			pthread_mutex_lock(&global->write_mutex);
+			oh_no_the_butler_is_dead(global, i);
+			pthread_mutex_unlock(&global->write_mutex);
 			break ;
 		}
 		if (!has_eaten_required_meals(global->philosophers[i]))
@@ -37,9 +48,6 @@ void monitor_simulation_state(t_state_machine *machine)
 	if (all_eaten)
 		global->dead = TRUE;
 	if (global->dead)
-	{
 		machine->execute = destroy_simulation_state;
-		return ;
-	}
 	usleep(1000);
 }

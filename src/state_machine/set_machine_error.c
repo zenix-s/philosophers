@@ -12,7 +12,7 @@
 
 #include "../../include/philosophers.h"
 
-void set_machine_error(t_state_machine *machine, char *error)
+void	set_machine_error(t_state_machine *machine, char *error)
 {
 	machine->error = error;
 	machine->execute = error_state;

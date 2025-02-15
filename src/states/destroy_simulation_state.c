@@ -12,10 +12,10 @@
 
 #include "../../include/philosophers.h"
 
-void destroy_simulation_state(t_state_machine *machine)
+void	destroy_simulation_state(t_state_machine *machine)
 {
-	t_global *global;
-	int i;
+	t_global	*global;
+	int			i;
 
 	global = machine->global;
 	i = 0;

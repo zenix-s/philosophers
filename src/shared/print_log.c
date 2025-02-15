@@ -12,12 +12,12 @@
 
 #include "../../include/philosophers.h"
 
-static uint64_t	timelog(t_philosopher *philo)
+static uint64_t	timelog(const t_philosopher *philo)
 {
 	return (timestamp() - philo->global->start_time);
 }
 
-void	print_log(t_philosopher *philo, t_action action)
+void	print_log(const t_philosopher *philo, const t_action action)
 {
 	pthread_mutex_lock(&philo->global->write_mutex);
 	if (philo->global->dead == FALSE)

@@ -12,16 +12,17 @@
 
 #include "../../include/philosophers.h"
 
-void create_forks_state(t_state_machine *machine)
+void	create_forks_state(t_state_machine *machine)
 {
-	t_global *global = machine->global;
-	int i;
+	t_global	*global;
+	int			i;
 
+	global = machine->global;
 	global->forks = malloc(sizeof(pthread_mutex_t) * global->n_philos);
 	if (!global->forks)
 	{
 		set_machine_error(machine, ERROR_MALLOC);
-		return;
+		return ;
 	}
 	i = 0;
 	while (i < global->n_philos)

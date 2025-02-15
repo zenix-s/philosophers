@@ -34,7 +34,7 @@ void	validate_arguments_state(t_state_machine *machine)
 	{
 		machine->error = ERROR_USAGE;
 		machine->execute = error_state;
-		return;
+		return ;
 	}
 	i = 1;
 	while (i < machine->argc)
@@ -43,7 +43,7 @@ void	validate_arguments_state(t_state_machine *machine)
 		{
 			machine->error = ERROR_NOT_NUMBER;
 			machine->execute = error_state;
-			return;
+			return ;
 		}
 		i++;
 	}

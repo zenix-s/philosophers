@@ -12,7 +12,7 @@
 
 #include "../../../include/philosophers.h"
 
-void error_state(t_state_machine *machine)
+void	error_state(t_state_machine *machine)
 {
 	printf("Error: %s\n", machine->error);
 	machine->is_done = TRUE;

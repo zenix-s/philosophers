@@ -12,7 +12,7 @@
 
 #include "../../include/philosophers.h"
 
-t_bool	is_even(const int n)
+t_bool	is_even(const int number)
 {
-	return (n % 2 == 0);
+	return (number % 2 == 0);
 }

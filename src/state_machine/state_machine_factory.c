@@ -12,22 +12,18 @@
 
 #include "../../include/philosophers.h"
 
-t_state_machine	*create_state_machine(int argc, char **argv)
+t_state_machine	*create_state_machine(const int argc, char **argv)
 {
 	t_state_machine	*state_machine;
 
 	state_machine = (t_state_machine *)malloc(sizeof(t_state_machine));
 	if (!state_machine)
 		return (NULL);
-	// Initialize state machine
 	state_machine->execute = NULL;
 	state_machine->is_done = FALSE;
 	state_machine->error = NULL;
 	state_machine->global = NULL;
-
-	// Initialize context
 	state_machine->argc = argc;
 	state_machine->argv = argv;
-
 	return (state_machine);
 }
