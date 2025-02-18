@@ -18,7 +18,7 @@ void	oh_no_the_butler_is_dead(t_global *global, uint8_t i)
 	if (!global->dead)
 	{
 		global->dead = TRUE;
-		printf("%011lu %d died\n", timestamp() - global->start_time,
+		printf("%lu %d died\n", timestamp() - global->start_time,
 			global->philosophers[i]->id);
 	}
 }

@@ -24,6 +24,8 @@ static t_bool	create_philosopher(t_philosopher **philo, const int id,
 	(*philo)->global = global;
 	(*philo)->l_fork = id;
 	(*philo)->r_fork = (id + 1) % global->n_philos;
+	(*philo)->lock_l_fork = FALSE;
+	(*philo)->lock_r_fork = FALSE;
 	return (TRUE);
 }
 

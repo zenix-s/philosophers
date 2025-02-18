@@ -71,7 +71,9 @@ typedef struct s_philosopher
 	uint64_t		meals;
 	uint64_t		last_meal;
 	pthread_t		thread;
+	t_bool			lock_l_fork;
 	uint64_t		l_fork;
+	t_bool			lock_r_fork;
 	uint64_t		r_fork;
 	struct s_global	*global;
 	void			(*routine)(struct s_philosopher *);

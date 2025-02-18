@@ -6,7 +6,7 @@
 /*   By: serferna <serferna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 00:17:58 by serferna          #+#    #+#             */
-/*   Updated: 2025/02/15 00:18:05 by serferna         ###   ########.fr       */
+/*   Updated: 2025/02/18 21:14:13 by serferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static void	create_global(t_global **global)
 
 static void	calculate_times(t_state_machine *machine)
 {
-	if (!to_uint8(machine->argv[1], &machine->global->n_philos)
-		|| machine->global->n_philos < 2)
+	if (!to_uint8(machine->argv[1], &machine->global->n_philos))
 		set_machine_error(machine, ERROR_N_PHIL);
 	else if (!to_uint64(machine->argv[2], &machine->global->die_time))
 		set_machine_error(machine, ERROR_DIE_TIME);

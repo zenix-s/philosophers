@@ -29,6 +29,7 @@ void	destroy_simulation_state(t_state_machine *machine);
 void	*philosopher_routine(void *philosopher);
 void	philosopher_eat_state(t_philosopher *philosopher);
 void	philosopher_sleep_state(t_philosopher *philosopher);
+void	take_forks_state(t_philosopher *philosopher);
 
 /**
  * When a philosopher dies, it will enter this state and will not be able to
