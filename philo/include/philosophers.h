@@ -30,12 +30,7 @@ void	*philosopher_routine(void *philosopher);
 void	philosopher_eat_state(t_philosopher *philosopher);
 void	philosopher_sleep_state(t_philosopher *philosopher);
 void	take_forks_state(t_philosopher *philosopher);
-
-/**
- * When a philosopher dies, it will enter this state and will not be able to
- * change its state anymore.
- */
-void	*philosopher_suicide_state(t_philosopher *philosopher);
+void	philosopher_clean_state(t_philosopher *philosopher);
 
 t_bool	is_philo_dead(const t_philosopher *philo);
 t_bool	has_eaten_required_meals(const t_philosopher *philo);
