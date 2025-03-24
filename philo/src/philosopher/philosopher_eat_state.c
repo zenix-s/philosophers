@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-
 #include "../../include/philosophers.h"
 
 void	philosopher_eat_state(t_philosopher *philosopher)
@@ -30,7 +28,8 @@ void	philosopher_eat_state(t_philosopher *philosopher)
 	philosopher->last_meal = timestamp();
 	while (!philosopher->global->dead)
 	{
-		if (timediff(philosopher->last_meal, timestamp()) >= philosopher->global->eat_time)
+		if (timediff(philosopher->last_meal,
+				timestamp()) >= philosopher->global->eat_time)
 			break ;
 		usleep(50);
 	}

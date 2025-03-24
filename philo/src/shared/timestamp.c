@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philosophers.h"
+#include "../../include/global.h"
 
 uint64_t	timestamp(void)
 {

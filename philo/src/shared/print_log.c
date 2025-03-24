@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philosophers.h"
+#include "../../include/domain.h"
 
 static uint64_t	timelog(const t_philosopher *philo)
 {
