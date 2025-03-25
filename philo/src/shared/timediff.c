@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philosophers.h"
+#include "../../include/global.h"
 
 uint64_t	timediff(const uint64_t start, const uint64_t end)
 {

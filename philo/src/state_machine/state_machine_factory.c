@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philosophers.h"
+#include "../../include/domain.h"
 
 t_state_machine	*create_state_machine(const int argc, char **argv)
 {

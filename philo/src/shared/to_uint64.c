@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philosophers.h"
+#include "../../include/global.h"
 
 t_bool	to_uint64(const char *str, uint64_t *n)
 {
