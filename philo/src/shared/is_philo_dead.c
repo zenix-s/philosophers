@@ -14,7 +14,5 @@
 
 t_bool	is_philo_dead(const t_philosopher *philo)
 {
-	if (has_eaten_required_meals(philo))
-		return (FALSE);
 	return (timestamp() - philo->last_meal > philo->global->die_time);
 }

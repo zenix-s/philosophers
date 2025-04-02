@@ -75,6 +75,7 @@ typedef struct s_philosopher
 	uint64_t		l_fork;
 	t_bool			lock_r_fork;
 	uint64_t		r_fork;
+	t_bool			is_ended;
 	struct s_global	*global;
 	void			(*routine)(struct s_philosopher *);
 }					t_philosopher;

@@ -27,7 +27,15 @@ void	*philosopher_routine(void *philosopher)
 	if (!is_even(philo->id))
 		usleep(1500);
 	philo->last_meal = timestamp();
-	while (!philo->global->dead && !has_eaten_required_meals(philo))
+	while (!philo->global->dead)
+	{
+		if (philo->global->dead)
+		{
+			philosopher_clean_state(philo);
+			break ;
+		}
 		philo->routine(philo);
+	}
+	philo->is_ended = TRUE;
 	return (NULL);
 }
