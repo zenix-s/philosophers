@@ -13,7 +13,29 @@ BLUE =			\033[0;94m
 #------------------------------------------------------------------------------#
 NAME	= philo
 
-SRCS	= $(shell find ./src -iname "*.c")
+SRCS	= ./src/main.c \
+          ./src/philosopher/philosopher_sleep_state.c \
+          ./src/philosopher/philosopher_eat_state.c \
+          ./src/philosopher/philosopher_routine.c \
+          ./src/shared/has_eaten_required_meals.c \
+          ./src/shared/is_even.c \
+          ./src/shared/print_log.c \
+          ./src/shared/timediff.c \
+          ./src/shared/timestamp.c \
+          ./src/shared/to_uint64.c \
+          ./src/shared/is_philo_dead.c \
+          ./src/state_machine/set_machine_error.c \
+          ./src/state_machine/state_machine_factory.c \
+          ./src/states/create_forks_state.c \
+          ./src/states/destroy_simulation_state.c \
+          ./src/states/error/error_state.c \
+          ./src/states/global/create_global_state.c \
+          ./src/states/monitor_simulation_state.c \
+          ./src/states/start_simulation_state.c \
+          ./src/states/validation/validate_arguments_state.c \
+          ./src/states/create_philosophers_state.c \
+          ./src/states/join_threads_state.c \
+
 OBJS	= ${SRCS:.c=.o}
 
 HEADERS	= -I ./include
