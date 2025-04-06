@@ -19,19 +19,22 @@ static uint64_t	timelog(const t_philosopher *philo)
 
 void	print_log(const t_philosopher *philo, const t_action action)
 {
+	int64_t	philo_id;
+
+	philo_id = philo->id + 1;
 	pthread_mutex_lock(&philo->global->write_mutex);
 	if (philo->global->dead == FALSE)
 	{
 		if (action == TAKE_FORK)
-			printf("%lu %d has taken a fork\n", timelog(philo), philo->id);
+			printf("%lu %lu has taken a fork\n", timelog(philo), philo_id);
 		else if (action == EATING)
-			printf("%lu %d is eating\n", timelog(philo), philo->id);
+			printf("%lu %lu is eating\n", timelog(philo), philo_id);
 		else if (action == SLEEPING)
-			printf("%lu %d is sleeping\n", timelog(philo), philo->id);
+			printf("%lu %lu is sleeping\n", timelog(philo), philo_id);
 		else if (action == THINKING)
-			printf("%lu %d is thinking\n", timelog(philo), philo->id);
+			printf("%lu %lu is thinking\n", timelog(philo), philo_id);
 		else if (action == DIED)
-			printf("%lu %d died\n", timelog(philo), philo->id);
+			printf("%lu %lu died\n", timelog(philo), philo_id);
 	}
 	pthread_mutex_unlock(&philo->global->write_mutex);
 }
