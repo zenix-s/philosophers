@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "../../include/philosophers.h"
-#include <stdint.h>
 
-void	oh_no_the_butler_is_dead(t_global *global, uint8_t i)
+static void	oh_no_the_butler_is_dead(t_global *global, uint8_t i)
 {
 	if (!global->dead)
 	{
