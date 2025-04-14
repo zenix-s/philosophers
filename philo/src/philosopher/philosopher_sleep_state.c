@@ -22,8 +22,10 @@ void	philosopher_sleep_state(t_philosopher *philosopher)
 	{
 		if (timediff(start, timestamp()) >= philosopher->global->sleep_time)
 			break ;
-		usleep(50);
+		usleep(200);
 	}
 	philosopher->routine = philosopher_eat_state;
 	print_log(philosopher, THINKING);
+	if (philosopher->id % 2 == 0)
+        usleep(1500);
 }

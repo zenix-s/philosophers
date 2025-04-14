@@ -32,7 +32,7 @@ void	philosopher_eat_state(t_philosopher *philosopher)
 				timestamp()) >= philosopher->global->eat_time
 			|| philosopher->global->dead)
 			break ;
-		usleep(50);
+		usleep(200);
 	}
 	pthread_mutex_unlock(&philosopher->global->forks[philosopher->l_fork]);
 	pthread_mutex_unlock(&philosopher->global->forks[philosopher->r_fork]);
