@@ -14,21 +14,31 @@
 
 void	philosopher_eat_state(t_philosopher *philosopher)
 {
+	uint64_t	start_eating_time;
+
 	if (philosopher->global->dead)
 		return ;
 	pthread_mutex_lock(&philosopher->global->forks[philosopher->l_fork]);
 	print_log(philosopher, TAKE_FORK);
 	if (philosopher->global->dead)
+	{
+		pthread_mutex_unlock(&philosopher->global->forks[philosopher->l_fork]);
 		return ;
+	}
 	pthread_mutex_lock(&philosopher->global->forks[philosopher->r_fork]);
 	print_log(philosopher, TAKE_FORK);
 	if (philosopher->global->dead)
+	{
+		pthread_mutex_unlock(&philosopher->global->forks[philosopher->l_fork]);
+		pthread_mutex_unlock(&philosopher->global->forks[philosopher->r_fork]);
 		return ;
+	}
 	print_log(philosopher, EATING);
 	philosopher->last_meal = timestamp();
+	start_eating_time = philosopher->last_meal;
 	while (!philosopher->global->dead)
 	{
-		if (timediff(philosopher->last_meal,
+		if (timediff(start_eating_time,
 				timestamp()) >= philosopher->global->eat_time
 			|| philosopher->global->dead)
 			break ;

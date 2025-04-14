@@ -41,7 +41,7 @@ OBJS	= ${SRCS:.c=.o}
 HEADERS	= -I ./include
 
 CC = cc
-CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -g3
+CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -g
 RM = rm -rf
 
 #------------------------------------------------------------------------------#
