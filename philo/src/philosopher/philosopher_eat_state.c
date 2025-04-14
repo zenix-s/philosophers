@@ -12,18 +12,14 @@
 
 #include "../../include/philosophers.h"
 
-void	philosopher_eat_state(t_philosopher *philosopher)
+static t_bool	take_forks(t_philosopher *philosopher)
 {
-	uint64_t	start_eating_time;
-
-	if (philosopher->global->dead)
-		return ;
 	pthread_mutex_lock(&philosopher->global->forks[philosopher->l_fork]);
 	print_log(philosopher, TAKE_FORK);
 	if (philosopher->global->dead)
 	{
 		pthread_mutex_unlock(&philosopher->global->forks[philosopher->l_fork]);
-		return ;
+		return (FALSE);
 	}
 	pthread_mutex_lock(&philosopher->global->forks[philosopher->r_fork]);
 	print_log(philosopher, TAKE_FORK);
@@ -31,8 +27,19 @@ void	philosopher_eat_state(t_philosopher *philosopher)
 	{
 		pthread_mutex_unlock(&philosopher->global->forks[philosopher->l_fork]);
 		pthread_mutex_unlock(&philosopher->global->forks[philosopher->r_fork]);
-		return ;
+		return (FALSE);
 	}
+	return (TRUE);
+}
+
+void	philosopher_eat_state(t_philosopher *philosopher)
+{
+	uint64_t	start_eating_time;
+
+	if (philosopher->global->dead)
+		return ;
+	if (!take_forks(philosopher))
+		return ;
 	print_log(philosopher, EATING);
 	philosopher->last_meal = timestamp();
 	start_eating_time = philosopher->last_meal;
