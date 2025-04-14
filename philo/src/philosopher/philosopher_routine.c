@@ -29,11 +29,6 @@ void	*philosopher_routine(void *philosopher)
 	philo->last_meal = timestamp();
 	while (!philo->global->dead)
 	{
-		// if (philo->global->dead)
-		// {
-		// 	philosopher_clean_state(philo);
-		// 	break ;
-		// }
 		philo->routine(philo);
 	}
 	philo->is_ended = TRUE;

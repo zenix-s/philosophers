@@ -49,5 +49,5 @@ void	monitor_simulation_state(t_state_machine *machine)
 		global->dead = TRUE;
 	if (global->dead)
 		machine->execute = join_threads_state;
-	usleep(1000);
+	// usleep(1000);
 }
