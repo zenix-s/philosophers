@@ -26,5 +26,4 @@ void	philosopher_sleep_state(t_philosopher *philosopher)
 	}
 	philosopher->routine = philosopher_eat_state;
 	print_log(philosopher, THINKING);
-	philosopher->last_meal = timestamp();
 }

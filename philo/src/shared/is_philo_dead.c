@@ -14,10 +14,5 @@
 
 t_bool	is_philo_dead(t_philosopher *philo)
 {
-	uint64_t	last_meal_time;
-	t_bool		is_dead;
-
-	last_meal_time = philo->last_meal;
-	is_dead = (timestamp() - last_meal_time > philo->global->die_time);
-	return (is_dead);
+	return (timediff(philo->last_meal, timestamp()) > philo->global->die_time);
 }
